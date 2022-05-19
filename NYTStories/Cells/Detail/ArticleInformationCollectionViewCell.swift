@@ -13,8 +13,7 @@ class ArticleInformationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
-        // Initialization code
     }
-
 }

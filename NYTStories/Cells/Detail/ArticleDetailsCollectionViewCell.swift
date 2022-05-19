@@ -13,8 +13,7 @@ class ArticleDetailsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var articleDescriptionLabel: UILabel!
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
-        // Initialization code
     }
-
 }

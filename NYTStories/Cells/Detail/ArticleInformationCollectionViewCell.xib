@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ArticleInformationCollectionViewCell" customModule="NYTStories" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="396" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="396" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xx4-4R-a8E">
+                        <rect key="frame" x="0.0" y="0.0" width="396" height="60"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="May 19, 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnf-At-Uic">
+                                <rect key="frame" x="10" y="8" width="90" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By Patricia Cohen and Valeriya Safronova" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nad-4h-YlH">
+                                <rect key="frame" x="10" y="33" width="376" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Nad-4h-YlH" firstAttribute="top" secondItem="dnf-At-Uic" secondAttribute="bottom" constant="8" id="8eq-3E-uvs"/>
+                            <constraint firstItem="dnf-At-Uic" firstAttribute="leading" secondItem="xx4-4R-a8E" secondAttribute="leading" constant="10" id="Cpb-55-Mje"/>
+                            <constraint firstAttribute="trailing" secondItem="Nad-4h-YlH" secondAttribute="trailing" constant="10" id="NN4-0G-wIh"/>
+                            <constraint firstItem="dnf-At-Uic" firstAttribute="top" secondItem="xx4-4R-a8E" secondAttribute="top" constant="8" id="YpL-FC-swp"/>
+                            <constraint firstItem="Nad-4h-YlH" firstAttribute="leading" secondItem="xx4-4R-a8E" secondAttribute="leading" constant="10" id="lws-Vk-XVf"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="xx4-4R-a8E" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="9Ut-wj-GaR"/>
+                <constraint firstAttribute="bottom" secondItem="xx4-4R-a8E" secondAttribute="bottom" id="SHP-A1-Yno"/>
+                <constraint firstAttribute="trailing" secondItem="xx4-4R-a8E" secondAttribute="trailing" id="UqF-0g-qHX"/>
+                <constraint firstItem="xx4-4R-a8E" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="pGa-xN-cSm"/>
+            </constraints>
+            <size key="customSize" width="396" height="64"/>
+            <connections>
+                <outlet property="articleDateLabel" destination="dnf-At-Uic" id="o7b-Tx-60h"/>
+                <outlet property="authorLabel" destination="Nad-4h-YlH" id="rla-UH-gVb"/>
+            </connections>
+            <point key="canvasLocation" x="388.40579710144931" y="148.66071428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -28,27 +28,23 @@ class ArticleTableViewCell: UITableViewCell {
         self.articleImage.image = nil
     }
     
-    func configure(article: Article) {
-        self.articleTitleLabel.text = article.title ?? ""
-        self.articleAuthorLabel.text = article.byline ?? ""
+    func configure(viewModel: ArticleCellViewModel) {
         
-        if let mediaUrl = article.multimedia?[2].url {
-            fetchImage(from: mediaUrl)
+        self.articleTitleLabel.text = viewModel.articleTitle
+        self.articleAuthorLabel.text = viewModel.articleAuthor
+        
+        if let mediaUrl = viewModel.articleImage {
+            
+            viewModel.fetchImage(for: mediaUrl, completion: { data in
+            
+                if let data = data, let image = UIImage(data: data) {
+                    
+                    self.articleImage.setImageAsync(image)
+                }
+            })
         } else {
-            setArticleImage()
-        }
-    }
-    
-    private func fetchImage(from url: String) {
-        
-        WebService().loadImage(for: url, completion: { image in
-            self.setArticleImage(with: image)
-        })
-    }
-    
-    private func setArticleImage(with image: UIImage? = UIImage(named: "nyt-logo")!) {
-        DispatchQueue.main.async {
-            self.articleImage.image = image
+            
+            articleImage.image = UIImage(named: "nyt-logo")
         }
     }
 }

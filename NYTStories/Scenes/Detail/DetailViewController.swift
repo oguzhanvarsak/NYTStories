@@ -8,6 +8,12 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    var viewModel: DetailViewModel? {
+        didSet {
+            viewModel?.delegate = self
+        }
+    }
 
     var screenWidth = UIScreen.main.bounds.width
     
@@ -45,6 +51,13 @@ class DetailViewController: UIViewController {
     }
 }
 
+extension DetailViewController: DetailViewModelDelegate {
+    
+    func reloadItems() {
+        
+    }
+}
+
 extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -64,12 +77,23 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
                     for: indexPath
                 ) as! ArticleInformationCollectionViewCell
                 
+                
+
+                
+                cell.articleDateLabel.text = Formatter().getDate(from: (viewModel?.selectedArticle?.created_date!)!)
+                cell.authorLabel.text = viewModel?.selectedArticle?.byline
+                
                 return cell
             default:
                 let cell: ArticleDetailsCollectionViewCell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: "ArticleDetailsCollectionViewCell",
                     for: indexPath
                 ) as! ArticleDetailsCollectionViewCell
+                
+                if let article = viewModel?.selectedArticle {
+                    
+                    cell.configure(viewModel: ArticleCellViewModel(article: article))
+                }
                 
                 return cell
         }

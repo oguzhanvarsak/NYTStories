@@ -38,7 +38,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYG-aP-TMr">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYG-aP-TMr">
                                             <rect key="frame" x="163" y="10" width="241" height="0.0"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                             <nil key="textColor"/>
@@ -68,7 +68,6 @@
                                     <outlet property="articleAuthorLabel" destination="ZON-vd-WII" id="7E8-IH-GKO"/>
                                     <outlet property="articleImage" destination="MeX-U3-5oN" id="gIt-1I-aET"/>
                                     <outlet property="articleTitleLabel" destination="eYG-aP-TMr" id="Qyf-Dd-FOF"/>
-                                    <segue destination="fyD-wE-Hbz" kind="show" id="7MC-5k-O16"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -77,7 +76,9 @@
                             <outlet property="delegate" destination="CZK-nE-Vn7" id="alQ-d2-Z0V"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Top Stories" largeTitleDisplayMode="always" id="rCm-eu-SP5"/>
+                    <navigationItem key="navigationItem" title="Top Stories" largeTitleDisplayMode="always" id="rCm-eu-SP5">
+                        <barButtonItem key="backBarButtonItem" title="Home" id="f3x-Cc-Ths"/>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="zZh-4C-oPE">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -86,12 +87,15 @@
                             <action selector="refreshControl:" destination="CZK-nE-Vn7" eventType="valueChanged" id="yW4-gP-8mQ"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <segue destination="fyD-wE-Hbz" kind="show" identifier="detailSegue" id="8XN-tr-m67"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ksx-3T-47A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1884.057971014493" y="109.82142857142857"/>
         </scene>
-        <!--Title-->
+        <!--Story Detail-->
         <scene sceneID="IPB-IK-yEf">
             <objects>
                 <viewController id="fyD-wE-Hbz" customClass="DetailViewController" customModule="NYTStories" customModuleProvider="target" sceneMemberID="viewController">
@@ -143,7 +147,7 @@
                             <constraint firstItem="URL-Wi-tQ2" firstAttribute="leading" secondItem="nuB-9w-vNA" secondAttribute="leading" id="oYj-7v-gJc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="f9U-JR-mVz">
+                    <navigationItem key="navigationItem" title="Story Detail" largeTitleDisplayMode="never" id="f9U-JR-mVz">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="action" id="Lji-FR-l39">
                             <connections>
                                 <action selector="share:" destination="fyD-wE-Hbz" id="QTt-6S-2cc"/>

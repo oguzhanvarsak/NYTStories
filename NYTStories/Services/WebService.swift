@@ -8,7 +8,15 @@
 import UIKit
 import Foundation
 
-class WebService {
+protocol WebServiceProtocol {
+    
+    func parseJSON(data: Data) -> MainModel?
+    func getArticles(url: URL, completion: @escaping (ArticleList?) -> Void)
+    func loadImage(for url: String, completion: @escaping (UIImage?) -> Void)
+    func loadData(from url: String, completion: @escaping (Data?) -> Void)
+}
+
+class WebService: WebServiceProtocol {
     
     let utilityQueue = DispatchQueue.global(qos: .utility)
 
@@ -24,6 +32,7 @@ class WebService {
             } else {
                 
                 if let data = data {
+                    
                     if let articleList = self.parseJSON(data: data) {
                         completion(articleList.results)
                     }
@@ -54,14 +63,29 @@ class WebService {
     
     func loadImage(for url: String, completion: @escaping (UIImage?) -> Void) {
         
-            utilityQueue.async {
+        utilityQueue.async {
+            
+            let url = URL(string: url)
+
+            guard let data = try? Data(contentsOf: url!) else { return }
+            let image = UIImage(data: data)
+
+            completion(image)
+        }
+    }
+    
+    func loadData(from url: String, completion: @escaping (Data?) -> Void) {
+        
+        utilityQueue.async {
+            let url = URL(string: url)!
+            
+            if let data = try? Data(contentsOf: url) {
                 
-                let url = URL(string: url)
-
-                guard let data = try? Data(contentsOf: url!) else { return }
-                let image = UIImage(data: data)
-
-                completion(image)
+                completion(data)
+            } else {
+                
+                completion(nil)
             }
         }
+    }
 }

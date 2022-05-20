@@ -6,17 +6,13 @@
 //
 
 import UIKit
+import SafariServices
 
 class DetailViewController: UIViewController {
     
-    var viewModel: DetailViewModel? {
-        didSet {
-            viewModel?.delegate = self
-        }
-    }
-
-    var screenWidth = UIScreen.main.bounds.width
+    var viewModel: DetailViewModel?
     
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -25,8 +21,13 @@ class DetailViewController: UIViewController {
         setup()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     private func setup() {
-
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -43,18 +44,23 @@ class DetailViewController: UIViewController {
     
     
     @IBAction func share(_ sender: UIBarButtonItem) {
-        // TODO: ActivityViewController & Share Actions
+        
+        if let shareUrl = viewModel?.selectedArticle?.url {
+            
+            let items = [URL(string: shareUrl)]
+            
+            let activity = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
+            present(activity, animated: true)
+        }
     }
     
     @IBAction func seeMore(_ sender: UIButton) {
-        // TODO: Present article using its url in sheet
-    }
-}
-
-extension DetailViewController: DetailViewModelDelegate {
-    
-    func reloadItems() {
         
+        if let fullStoryUrl = viewModel?.selectedArticle?.url, let url = URL(string: fullStoryUrl) {
+            
+            let safariController = SFSafariViewController(url: url)
+            present(safariController, animated: true, completion: nil)
+        }
     }
 }
 
@@ -77,10 +83,7 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
                     for: indexPath
                 ) as! ArticleInformationCollectionViewCell
                 
-                
-
-                
-                cell.articleDateLabel.text = Formatter().getDate(from: (viewModel?.selectedArticle?.created_date!)!)
+                cell.articleDateLabel.text = viewModel?.getDate(from: viewModel?.selectedArticle?.published_date)
                 cell.authorLabel.text = viewModel?.selectedArticle?.byline
                 
                 return cell
@@ -97,15 +100,17 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 
                 return cell
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let safeWidth = self.view.safeAreaLayoutGuide.layoutFrame.size.width
+        
         switch indexPath.section {
             case 0:
-                return CGSize(width: screenWidth, height: 60)
+                return CGSize(width: safeWidth, height: 60)
             default:
-                return CGSize(width: screenWidth, height: collectionView.frame.height)
+                return CGSize(width: safeWidth, height: 500)
         }
     }
 }
+

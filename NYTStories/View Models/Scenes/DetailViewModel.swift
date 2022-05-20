@@ -7,15 +7,10 @@
 
 import Foundation
 
-protocol DetailViewModelDelegate: AnyObject {
-    func reloadItems()
-}
-
 final class DetailViewModel {
     
     private var article: Article?
-    
-    weak var delegate: DetailViewModelDelegate?
+    private var dateFormatter = Formatter()
     
     init(article: Article) {
         
@@ -27,5 +22,15 @@ extension DetailViewModel {
     
     var selectedArticle: Article? {
         return article
+    }
+    
+    func getDate(from dateString: String?) -> String {
+        
+        if let dateString = dateString {
+          
+            return dateFormatter.getDate(from: dateString)
+        }
+        
+        return ""
     }
 }

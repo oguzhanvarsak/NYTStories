@@ -12,7 +12,7 @@ protocol WebServiceProtocol {
     
     func parseJSON(data: Data) -> MainModel?
     func getArticles(url: URL, completion: @escaping (ArticleList?) -> Void)
-    func loadImage(for url: String, completion: @escaping (UIImage?) -> Void)
+    func loadImage(from url: String, completion: @escaping (UIImage?) -> Void)
     func loadData(from url: String, completion: @escaping (Data?) -> Void)
 }
 
@@ -61,7 +61,7 @@ class WebService: WebServiceProtocol {
         }
     }
     
-    func loadImage(for url: String, completion: @escaping (UIImage?) -> Void) {
+    func loadImage(from url: String, completion: @escaping (UIImage?) -> Void) {
         
         utilityQueue.async {
             

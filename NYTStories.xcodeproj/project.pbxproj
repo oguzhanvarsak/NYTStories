@@ -172,8 +172,8 @@
 		95537D242836CCD00040FE74 /* NYTStoriesTests */ = {
 			isa = PBXGroup;
 			children = (
-				95537D252836CCD00040FE74 /* WebServiceTests.swift */,
 				954D09192838AD47008C8C2E /* MockConstants.swift */,
+				95537D252836CCD00040FE74 /* WebServiceTests.swift */,
 			);
 			path = NYTStoriesTests;
 			sourceTree = "<group>";

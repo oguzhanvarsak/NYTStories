@@ -103,6 +103,7 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         let safeWidth = self.view.safeAreaLayoutGuide.layoutFrame.size.width
         
         switch indexPath.section {

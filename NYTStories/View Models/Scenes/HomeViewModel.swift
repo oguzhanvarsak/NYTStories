@@ -29,6 +29,10 @@ final class HomeViewModel {
                             completion: { articles in
             if let articles = articles {
                 
+                if isRefresh {
+                    self.articles.removeAll()
+                }
+                
                 self.articles.append(contentsOf: articles)
                 self.delegate?.reloadItems()
                 

@@ -14,7 +14,7 @@
         <scene sceneID="2vI-ru-hfj">
             <objects>
                 <tableViewController id="CZK-nE-Vn7" customClass="HomeTableViewController" customModule="NYTStories" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="GGt-mN-Fhs">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="GGt-mN-Fhs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -114,52 +114,34 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcX-Vw-jKG">
-                                <rect key="frame" x="0.0" y="766" width="414" height="130"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mgt-ef-sjb">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onm-VN-A8j">
-                                            <rect key="frame" x="69.5" y="35" width="275" height="40"/>
-                                            <color key="backgroundColor" name="AccentColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="ktx-Ly-aY3"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="275" id="zA4-Jx-vZE"/>
-                                            </constraints>
-                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                            <state key="normal" title="See More">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="5"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="seeMore:" destination="fyD-wE-Hbz" eventType="touchUpInside" id="a6K-F5-vJE"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="onm-VN-A8j" firstAttribute="centerY" secondItem="Mgt-ef-sjb" secondAttribute="centerY" constant="-10" id="R8m-rd-mI2"/>
-                                        <constraint firstItem="onm-VN-A8j" firstAttribute="centerX" secondItem="Mgt-ef-sjb" secondAttribute="centerX" id="eGq-lD-GhD"/>
-                                    </constraints>
-                                </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onm-VN-A8j">
+                                <rect key="frame" x="69.5" y="812" width="275" height="40"/>
+                                <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="3sd-mh-wc5"/>
+                                    <constraint firstAttribute="height" constant="40" id="ktx-Ly-aY3"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="275" id="zA4-Jx-vZE"/>
                                 </constraints>
-                                <blurEffect style="regular"/>
-                            </visualEffectView>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="See More">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="seeMore:" destination="fyD-wE-Hbz" eventType="touchUpInside" id="a6K-F5-vJE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nuB-9w-vNA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="dcX-Vw-jKG" secondAttribute="bottom" id="11G-Cd-mo8"/>
+                            <constraint firstItem="onm-VN-A8j" firstAttribute="bottom" secondItem="nuB-9w-vNA" secondAttribute="bottom" constant="-10" id="52U-2I-QXr"/>
                             <constraint firstAttribute="bottom" secondItem="URL-Wi-tQ2" secondAttribute="bottom" id="IlH-ZL-fxG"/>
                             <constraint firstItem="URL-Wi-tQ2" firstAttribute="trailing" secondItem="nuB-9w-vNA" secondAttribute="trailing" id="Krl-vm-sMv"/>
-                            <constraint firstItem="dcX-Vw-jKG" firstAttribute="leading" secondItem="aQR-sp-cZF" secondAttribute="leading" id="hpG-fq-nhN"/>
-                            <constraint firstItem="dcX-Vw-jKG" firstAttribute="trailing" secondItem="aQR-sp-cZF" secondAttribute="trailing" id="iGx-oH-ex6"/>
+                            <constraint firstItem="onm-VN-A8j" firstAttribute="centerX" secondItem="aQR-sp-cZF" secondAttribute="centerX" id="fKa-qs-qb1"/>
                             <constraint firstItem="URL-Wi-tQ2" firstAttribute="top" secondItem="nuB-9w-vNA" secondAttribute="top" id="m63-UB-RGN"/>
                             <constraint firstItem="URL-Wi-tQ2" firstAttribute="leading" secondItem="nuB-9w-vNA" secondAttribute="leading" id="oYj-7v-gJc"/>
                         </constraints>

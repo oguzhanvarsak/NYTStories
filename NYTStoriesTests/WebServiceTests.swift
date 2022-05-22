@@ -81,10 +81,3 @@ class WebServiceTests: XCTestCase {
         XCTAssertTrue(imageData != nil)
     }
 }
-    })
-    
-    wait(for: [expected], timeout: 5)
-    
-    XCTAssertTrue(imageData != nil)
-}
-}

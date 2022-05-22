@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ArticleCellViewModelDelegate: AnyObject {
-    func fetchImage(for url: String, completion: @escaping (Data?) -> Void)
+    func fetchImageData(for url: String, completion: @escaping (Result<Data?, NetworkError>) -> Void)
 }
 
 final class ArticleCellViewModel {
@@ -40,9 +40,14 @@ extension ArticleCellViewModel {
         return article?.multimedia?[1].url
     }
     
-    func fetchImage(for url: String, completion: @escaping (Data?) -> Void) {
-        service.loadData(from: url, completion: { imageData in
-            completion(imageData)
+    func fetchImageData(for url: String, completion: @escaping (Result<Data?, NetworkError>) -> Void) {
+        service.loadData(from: url, completion: { result in
+            switch result {
+                case .success(let imageData):
+                    completion(.success(imageData))
+                case .failure(let error):
+                    completion(.failure(error))
+            }
         })
     }
 }

@@ -32,9 +32,16 @@ class ArticleTableViewCell: UITableViewCell {
         self.articleAuthorLabel.text = viewModel.articleAuthor
         
         if let mediaUrl = viewModel.articleImage {
-            viewModel.fetchImage(for: mediaUrl, completion: { data in
-                if let data = data, let image = UIImage(data: data) {
-                    self.articleImage.setImageAsync(image)
+            viewModel.fetchImageData(for: mediaUrl, completion: { result in
+                switch result {
+                    case .success(let data):
+                        if let data = data, let image = UIImage(data: data) {
+                            self.articleImage.setImageAsync(image)
+                        } else {
+                            self.articleImage.image = UIImage(named: "nyt-logo")
+                        }
+                    case .failure(let error):
+                        print(error.localizedDescription)
                 }
             })
         } else {

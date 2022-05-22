@@ -10,6 +10,7 @@ import Foundation
 protocol HomeViewModelDelegate: AnyObject {
     func reloadItems()
     func endRefreshing()
+    func presentAlert(description: String)
 }
 
 final class HomeViewModel {
@@ -24,19 +25,19 @@ final class HomeViewModel {
     }
 
     func getArticles(isRefresh: Bool = false) {
-        service.getArticles(url: URL(string: String(format: Url.topStories, Secrets.apiKey))!,
-                            completion: { articles in
-            if let articles = articles {
-                if isRefresh {
-                    self.articles.removeAll()
-                }
-                
-                self.articles.append(contentsOf: articles)
-                self.delegate?.reloadItems()
-                
-                if isRefresh {
-                    self.delegate?.endRefreshing()
-                }
+        service.getArticles(url: String(format: Url.topStories, Secrets.apiKey),
+                            completion: { result in
+            
+            switch result {
+                case .success(let articles):
+                    self.articles = articles!
+                    self.delegate?.reloadItems()
+                    
+                    if isRefresh {
+                        self.delegate?.endRefreshing()
+                    }
+                case .failure(let error):
+                    self.delegate?.presentAlert(description: error.localizedDescription)
             }
         })
     }

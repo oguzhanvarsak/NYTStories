@@ -25,7 +25,7 @@ extension DetailViewModel {
     
     func getDate(from dateString: String?) -> String {
         if let dateString = dateString {
-            return dateFormatter.getDate(from: dateString)
+            return dateString.getDate()
         }
         
         return ""

@@ -37,12 +37,10 @@ class WebServiceTests: XCTestCase {
     }
 
     func setupData() {
-        
         sut = WebService()
     }
     
     func testFetchStoryList() throws {
-        
         setupData()
         
         let expected = XCTestExpectation(description: "WebService fetchs stories and runs the callback closure")
@@ -58,11 +56,9 @@ class WebServiceTests: XCTestCase {
     }
     
     func testLoadImage() throws {
-        
         setupData()
         
         let expected = XCTestExpectation(description: "WebService loads image and runs the callback closure")
-        
         var uiImage: UIImage? = nil
         
         sut.loadImage(from: Urls.imageUrl, completion: { image in
@@ -77,15 +73,12 @@ class WebServiceTests: XCTestCase {
     }
     
     func testLoadData() throws {
-        
         setupData()
         
         let expected = XCTestExpectation(description: "WebService loads data and runs the callback closure")
-        
         var imageData: Data? = nil
         
         sut.loadData(from: Urls.imageUrl, completion: { data in
-            
             imageData = data
             expected.fulfill()
         })

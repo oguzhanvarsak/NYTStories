@@ -24,11 +24,9 @@ final class HomeViewModel {
     }
 
     func getArticles(isRefresh: Bool = false) {
-        
         service.getArticles(url: URL(string: String(format: Url.topStories, Secrets.apiKey))!,
                             completion: { articles in
             if let articles = articles {
-                
                 if isRefresh {
                     self.articles.removeAll()
                 }

@@ -19,30 +19,24 @@ final class ArticleCellViewModel {
     weak var delegate: ArticleCellViewModelDelegate?
     
     init(article: Article) {
-        
         self.article = article
     }
 }
 
 extension ArticleCellViewModel {
-    
     var articleTitle: String? {
-        
         return article?.title
     }
     
     var articleDescription: String? {
-        
         return article?.abstract
     }
     
     var articleAuthor: String? {
-        
         return article?.byline
     }
     
     var articleImage: String? {
-        
         return article?.multimedia?[1].url
     }
     

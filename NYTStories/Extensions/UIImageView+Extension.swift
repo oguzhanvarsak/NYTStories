@@ -12,7 +12,6 @@ extension UIImageView {
     func setImageAsync(_ image: UIImage?) {
         
         DispatchQueue.main.async {
-            
             self.alpha = 0
             self.image = image
             self.fadeIn()

@@ -20,16 +20,13 @@ class HomeTableViewController: UITableViewController {
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         setup()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let article = sender as? Article {
-            
             let controller = segue.destination as! DetailViewController
             
             controller.viewModel = DetailViewModel(article: article)
@@ -54,23 +51,19 @@ class HomeTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-
         return viewModel?.numberOfSections ?? 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return viewModel?.numberOfRowInSection(section) ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as? ArticleTableViewCell else {
             fatalError("\("articleCell") not found.")
         }
         
         if let article = viewModel?.articleAtIndex(indexPath.row) {
-            
             cell.configure(viewModel: ArticleCellViewModel(article: article))
         }
         
@@ -78,7 +71,6 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if let article = viewModel?.articleAtIndex(indexPath.row) {
             
             performSegue(withIdentifier: "detailSegue", sender: article)

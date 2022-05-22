@@ -19,15 +19,12 @@ final class DetailViewModel {
 }
 
 extension DetailViewModel {
-    
     var selectedArticle: Article? {
         return article
     }
     
     func getDate(from dateString: String?) -> String {
-        
         if let dateString = dateString {
-          
             return dateFormatter.getDate(from: dateString)
         }
         

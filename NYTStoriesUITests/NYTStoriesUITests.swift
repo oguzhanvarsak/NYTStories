@@ -18,24 +18,19 @@ class NYTStoriesUITests: XCTestCase {
     let shareButton = "Share"
     
     func navigateToDetail(for index: Int = 0) {
-        
         app.tables.cells.element(boundBy: index).tap()
     }
     
     func navigateToSafari() {
-        
         app.buttons[seeMoreButtonTitle].tap()
     }
     
     func launcAndCheckCells() {
-        
         app.launch()
-        
         XCTAssert(app.tables.cells.element(boundBy: 0).waitForExistence(timeout: 5))
     }
     
     func orientate() {
-        
         XCUIDevice.shared.orientation = .landscapeLeft
         sleep(2)
         
@@ -47,11 +42,9 @@ class NYTStoriesUITests: XCTestCase {
     }
     
     func testNavigation() throws {
-        
         launcAndCheckCells()
         
         for i in 0 ..< 3 {
-            
             navigateToDetail(for: i)
             
             XCTAssert(app.navigationBars[detailViewControllerTitle].exists
@@ -62,9 +55,7 @@ class NYTStoriesUITests: XCTestCase {
     }
     
     func testShareActivityController() throws {
-        
         launcAndCheckCells()
-        
         navigateToDetail()
         
         let storyDetailNavigationBar = app.navigationBars[detailViewControllerTitle]
@@ -74,19 +65,12 @@ class NYTStoriesUITests: XCTestCase {
     }
     
     func testScreenOrientations() throws {
-        
         launcAndCheckCells()
-        
         orientate()
-        
         navigateToDetail(for: 0)
-        
         orientate()
-        
         navigateToSafari()
-        
         XCTAssert(app.webViews.element.waitForExistence(timeout: 2))
-        
         orientate()
     }
 }

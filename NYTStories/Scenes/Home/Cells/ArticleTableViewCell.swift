@@ -20,7 +20,6 @@ class ArticleTableViewCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        
         super.setSelected(selected, animated: animated)
     }
     
@@ -29,21 +28,16 @@ class ArticleTableViewCell: UITableViewCell {
     }
     
     func configure(viewModel: ArticleCellViewModel) {
-        
         self.articleTitleLabel.text = viewModel.articleTitle
         self.articleAuthorLabel.text = viewModel.articleAuthor
         
         if let mediaUrl = viewModel.articleImage {
-            
             viewModel.fetchImage(for: mediaUrl, completion: { data in
-            
                 if let data = data, let image = UIImage(data: data) {
-                    
                     self.articleImage.setImageAsync(image)
                 }
             })
         } else {
-            
             articleImage.image = UIImage(named: "nyt-logo")
         }
     }

@@ -11,7 +11,13 @@ struct MainModel: Decodable {
     let status: String?
     let copyright: String?
     let section: String?
-    let last_updated: String?
-    let num_results: Int?
+    let lastUpdated: String?
+    let numResults: Int?
     let results: ArticleList?
+    
+    enum CodingKeys: String, CodingKey {
+        case status, copyright, section, results
+        case lastUpdated = "last_updated"
+        case numResults = "num_results"
+    }
 }

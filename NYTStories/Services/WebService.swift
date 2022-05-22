@@ -9,7 +9,6 @@ import UIKit
 import Foundation
 
 protocol WebServiceProtocol {
-    
     func parseJSON(data: Data) -> MainModel?
     func getArticles(url: URL, completion: @escaping (ArticleList?) -> Void)
     func loadImage(from url: String, completion: @escaping (UIImage?) -> Void)
@@ -17,22 +16,16 @@ protocol WebServiceProtocol {
 }
 
 class WebService: WebServiceProtocol {
-    
     let utilityQueue = DispatchQueue.global(qos: .utility)
 
     func getArticles(url: URL, completion: @escaping (ArticleList?) -> Void) {
-        
         let session = URLSession.init(configuration: .default)
         
         let task = session.dataTask(with: url) { data, response, error in
-            
             if let error = error {
-                
                 print(error.localizedDescription)
             } else {
-                
                 if let data = data {
-                    
                     if let articleList = self.parseJSON(data: data) {
                         completion(articleList.results)
                     }
@@ -41,30 +34,23 @@ class WebService: WebServiceProtocol {
         }
         
         task.resume()
-        
     }
     
     func parseJSON(data: Data) -> MainModel? {
-        
         let decoder = JSONDecoder()
-        
+
         do {
-            
             let decodedData = try decoder.decode(MainModel.self, from: data)
             
             return decodedData
-            
         } catch {
-            
             print(error.localizedDescription)
             return nil
         }
     }
     
     func loadImage(from url: String, completion: @escaping (UIImage?) -> Void) {
-        
         utilityQueue.async {
-            
             let url = URL(string: url)
 
             guard let data = try? Data(contentsOf: url!) else { return }
@@ -75,15 +61,12 @@ class WebService: WebServiceProtocol {
     }
     
     func loadData(from url: String, completion: @escaping (Data?) -> Void) {
-        
         utilityQueue.async {
             let url = URL(string: url)!
             
             if let data = try? Data(contentsOf: url) {
-                
                 completion(data)
             } else {
-                
                 completion(nil)
             }
         }

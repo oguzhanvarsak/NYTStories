@@ -20,8 +20,8 @@ final class HomeViewModel {
     
     weak var delegate: HomeViewModelDelegate?
     
-    init(webService: WebServiceProtocol) {
-        self.service = webService
+    init() {
+        self.service = WebService()
     }
 
     func getArticles(isRefresh: Bool = false) {

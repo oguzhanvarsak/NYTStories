@@ -45,31 +45,19 @@ class WebServiceTests: XCTestCase {
         
         let expected = XCTestExpectation(description: "WebService fetchs stories and runs the callback closure")
         
-        sut.getArticles(url: URL(string: String(format: Url.topStories, Secrets.apiKey))!, completion: { result in
-            self.articles = result
-            expected.fulfill()
+        sut.getArticles(url: String(format: Url.topStories, Secrets.apiKey), completion: { result in
+            switch result {
+                case .success(let articles):
+                    self.articles = articles
+                    expected.fulfill()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
+            }
         })
         
         wait(for: [expected], timeout: 5)
         
         XCTAssertNotNil(articles)
-    }
-    
-    func testLoadImage() throws {
-        setupData()
-        
-        let expected = XCTestExpectation(description: "WebService loads image and runs the callback closure")
-        var uiImage: UIImage? = nil
-        
-        sut.loadImage(from: Urls.imageUrl, completion: { image in
-            
-            uiImage = image
-            expected.fulfill()
-        })
-        
-        wait(for: [expected], timeout: 5)
-        
-        XCTAssertTrue(uiImage != nil)
     }
     
     func testLoadData() throws {
@@ -78,13 +66,25 @@ class WebServiceTests: XCTestCase {
         let expected = XCTestExpectation(description: "WebService loads data and runs the callback closure")
         var imageData: Data? = nil
         
-        sut.loadData(from: Urls.imageUrl, completion: { data in
-            imageData = data
-            expected.fulfill()
+        sut.loadData(from: Urls.imageUrl, completion: { result in
+            switch result {
+                case .success(let data):
+                    imageData = data
+                    expected.fulfill()
+                case .failure(let error):
+                    XCTExpectFailure(error.localizedDescription)
+            }
         })
         
         wait(for: [expected], timeout: 5)
         
         XCTAssertTrue(imageData != nil)
     }
+}
+    })
+    
+    wait(for: [expected], timeout: 5)
+    
+    XCTAssertTrue(imageData != nil)
+}
 }

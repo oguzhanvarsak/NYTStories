@@ -15,8 +15,6 @@ class HomeTableViewController: UITableViewController {
         }
     }
     
-    let webService = WebService()
-    
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     
     override func viewDidLoad() {
@@ -36,7 +34,7 @@ class HomeTableViewController: UITableViewController {
     private func setup() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
-        viewModel = HomeViewModel(webService: webService)
+        viewModel = HomeViewModel()
         
         activityIndicator.startAnimating()
         tableView.backgroundView = activityIndicator
@@ -51,11 +49,11 @@ class HomeTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections ?? 0
+        return viewModel.numberOfSections
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowInSection(section) ?? 0
+        return viewModel.numberOfRowInSection(section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,10 +69,9 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let article = viewModel.articleAtIndex(indexPath.row) {
+        guard let article = viewModel.articleAtIndex(indexPath.row) else { return }
             
-            performSegue(withIdentifier: "detailSegue", sender: article)
-        }
+        performSegue(withIdentifier: "detailSegue", sender: article)
     }
 }
 
@@ -101,6 +98,6 @@ extension HomeTableViewController: HomeViewModelDelegate {
             }))
             
             self.present(alert, animated: true, completion: nil)
-        }   
+        }
     }
 }

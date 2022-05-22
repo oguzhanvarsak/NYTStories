@@ -86,8 +86,9 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
                     for: indexPath
                 ) as! ArticleDetailsCollectionViewCell
                 
+                cell.delegate = self
+                
                 if let article = viewModel?.selectedArticle {
-                    
                     cell.configure(viewModel: ArticleCellViewModel(article: article))
                 }
                 
@@ -104,6 +105,16 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
             default:
                 return CGSize(width: safeWidth, height: 500)
         }
+    }
+}
+
+extension DetailViewController: ArticleDetailsCollectionViewCellDelegate {
+    func presentAlert(description: String) {
+        let alert = UIAlertController(title: "Error", message: description, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

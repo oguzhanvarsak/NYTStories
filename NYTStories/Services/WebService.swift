@@ -9,65 +9,62 @@ import UIKit
 import Foundation
 
 protocol WebServiceProtocol {
-    func parseJSON(data: Data) -> MainModel?
-    func getArticles(url: URL, completion: @escaping (ArticleList?) -> Void)
-    func loadImage(from url: String, completion: @escaping (UIImage?) -> Void)
-    func loadData(from url: String, completion: @escaping (Data?) -> Void)
+    func parseJSON(data: Data) -> Result<MainModel?, NetworkError>
+    func getArticles(url: String, completion: @escaping (Result<ArticleList?, NetworkError>) -> Void)
+    func loadData(from url: String, completion: @escaping (Result<Data?, NetworkError>) -> Void)
 }
 
 class WebService: WebServiceProtocol {
     let utilityQueue = DispatchQueue.global(qos: .utility)
 
-    func getArticles(url: URL, completion: @escaping (ArticleList?) -> Void) {
+    func getArticles(url: String, completion: @escaping (Result<ArticleList?, NetworkError>) -> Void) {
         let session = URLSession.init(configuration: .default)
         
-        let task = session.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                if let data = data {
-                    if let articleList = self.parseJSON(data: data) {
-                        completion(articleList.results)
+        if let url = URL(string: url) {
+            let task = session.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    completion(.failure(.noInternetConnection))
+                } else {
+                    if let data = data {
+                        if let articleList = try? self.parseJSON(data: data).get() {
+                            completion(.success(articleList.results))
+                        }
                     }
                 }
             }
+            
+            task.resume()
+        } else {
+            completion(.failure(.badUrl))
         }
         
-        task.resume()
+       
     }
     
-    func parseJSON(data: Data) -> MainModel? {
+    func parseJSON(data: Data) -> Result<MainModel?, NetworkError> {
         let decoder = JSONDecoder()
 
         do {
             let decodedData = try decoder.decode(MainModel.self, from: data)
             
-            return decodedData
+            return .success(decodedData)
         } catch {
             print(error.localizedDescription)
-            return nil
+            return .failure(.errorParsingJSON(error.localizedDescription))
         }
     }
     
-    func loadImage(from url: String, completion: @escaping (UIImage?) -> Void) {
+    func loadData(from url: String, completion: @escaping (Result<Data?, NetworkError>) -> Void) {
         utilityQueue.async {
-            let url = URL(string: url)
-
-            guard let data = try? Data(contentsOf: url!) else { return }
-            let image = UIImage(data: data)
-
-            completion(image)
-        }
-    }
-    
-    func loadData(from url: String, completion: @escaping (Data?) -> Void) {
-        utilityQueue.async {
-            let url = URL(string: url)!
-            
-            if let data = try? Data(contentsOf: url) {
-                completion(data)
+            if let url = URL(string: url) {
+                if let data = try? Data(contentsOf: url) {
+                    completion(.success(data))
+                } else {
+                    completion(.failure(.dataReturnedNil))
+                }
             } else {
-                completion(nil)
+                completion(.failure(.badUrl))
             }
         }
     }
